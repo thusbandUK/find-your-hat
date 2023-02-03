@@ -130,7 +130,7 @@ if ((newCoordinates.newArray === -1) || (newCoordinates.newPosition === -1) || (
 } 
 console.log()
 if (myField.name[newCoordinates.newArray][newCoordinates.newPosition] === hole.toString()){
-  console.log('gone this way?');
+  //console.log('gone this way?');
   console.log('You fell in a hole! Unlucky loser!!');
   return gameFinished = true;
 }
@@ -144,17 +144,17 @@ else if (myField.name[newCoordinates.newArray][newCoordinates.newPosition] === h
 }
 //console.log(myField.currentArray);
 //console.log(myField.currentPosition);
-  myField.print(randomlyGeneratedField);
+  myField.print();
 
 
 
 }
 }
 
-//gamePlay('data');
+gamePlay('data');
 //myField.print(myField.generateField(10, 10));
 //myField.generateField(10, 10);
 
 
-const hello = prompt('Which way?');
-console.log(hello);
+//const hello = prompt('Which way?');
+//console.log(hello);
