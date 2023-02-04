@@ -81,33 +81,24 @@ class Field {
     const height = enteredHeight ? enteredHeight : 10;
     const width = enteredWidth ? enteredWidth : 10;
     
- 
-  const randomNumber = () => {
-  return Math.floor(Math.random() * 2);
-  }
-  
-  let completeArray = [];
-  for (let z = 0; z < height; z++){
-    let arrayUnderConstruction = [];
-    for (let y = 0; y < width; y++){
-      if (randomNumber() === 0){
-        
-        arrayUnderConstruction.push(fieldCharacter);
-      } else if (randomNumber() === 1){
-        
-        arrayUnderConstruction.push(hole);
-      } else {
-        arrayUnderConstruction.push(fieldCharacter);
+    const randomNumber = () => {
+      return Math.floor(Math.random() * 2);
       }
-    }   
+      
+      let completeArray = [];
+      for (let z = 0; z < height; z++){
+        let arrayUnderConstruction = [];
+        for (let y = 0; y < width; y++){                     
+            arrayUnderConstruction.push(fieldCharacter);          
+        }
+        completeArray.push(arrayUnderConstruction);        
+      }
     
-    completeArray.push(arrayUnderConstruction); 
-    
-  }
-  
-  completeArray[0][0] = pathCharacter;
+      //add asterisk top left for pathCharacter
+  completeArray[0][0] = pathCharacter; 
  
- 
+  //generate random coordinates to place hat and then insert hat there
+
   const yCoordinate = () => {
     return Math.floor(Math.random() * height);
   }
@@ -117,8 +108,48 @@ class Field {
   }
   
   completeArray[yCoordinate()][xCoordinate()] = hat;
+
+  //determine number of holes to add from specified proportion
+
+  const defaultManagedPercentageHole = percentageHole ? percentageHole : 10;
+  const numberOfHolesToAdd = defaultManagedPercentageHole / 100 * height * width;
+  for (let w = 0; w < numberOfHolesToAdd; w++){
+    let randomY = Math.floor(Math.random() * height);
+    const updatedArray = spliceAtRandom(completeArray[randomY]);
+    completeArray.splice(randomY, 1, updatedArray);
+
+  }
       
   return completeArray;
+
+//insert here
+/*
+    const randomNumber = () => {
+      return Math.floor(Math.random() * 2);
+      }
+      
+      let completeArray = [];
+      for (let z = 0; z < height; z++){
+        let arrayUnderConstruction = [];
+        for (let y = 0; y < width; y++){
+          if (randomNumber() === 0){
+            
+            arrayUnderConstruction.push(fieldCharacter);
+          } else if (randomNumber() === 1){
+            
+            arrayUnderConstruction.push(hole);
+          } else {
+            arrayUnderConstruction.push(fieldCharacter);
+          }
+        }   
+        
+        completeArray.push(arrayUnderConstruction); 
+        
+      }
+      */
+//insertion ends here
+
+
     }      
   
   }

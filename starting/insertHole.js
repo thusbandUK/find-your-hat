@@ -5,7 +5,7 @@ const exemplarArray = ['#','#','o','o','#','o','#','#','o','#','#','o','#']
 function howMuchHash(array){
     let count = 0;
     array.forEach((x)=>{
-        if (x === '#'){
+        if (x === '░'){
             return count = count + 1;
         }
     })
@@ -19,7 +19,7 @@ function indexNthHash(array, hashNumber){
     let finalIndex;
     let count = 0;
     for (let z = 0; z < array.length; z++){
-        if (array[z] === '#'){
+        if (array[z] === '░'){
             count = count+1;            
         }
         if (count === hashNumber){
