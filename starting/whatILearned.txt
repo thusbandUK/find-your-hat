@@ -1,6 +1,0 @@
-What I done learned is that...
-
-things can be underlined in Visual Studio, it doesn't mean they won't Works
-CHANGE DIRECTORY!! It wouldn't launch main.js because I wasn't in the right DIRECTORY
-
-And that's pretty much it

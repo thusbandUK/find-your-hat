@@ -1,6 +1,10 @@
-const exemplarArray = ['*','░','o','o','░','o','░','░','o','░','░','o','░']
+//takes an array potentially containing fieldCharacters, one hat and one path character, counts the number of field characters,
+//generates a random number of at least 1 but less than the total number of field characters,
+//splices in a hole at that Nth position
+//outs the new array
 
-//returns total number of hashes
+
+//returns total number of field characters
 
 function howMuchHash(array){
     let count = 0;
@@ -8,35 +12,27 @@ function howMuchHash(array){
         if (x === '░'){
             return count = count + 1;
         }
-    })
-    //console.log(`Number of hashes counted: ${count}`);
+    })    
     return count;
-
 }
 
 //returns index of Nth hash
 
-function indexNthHash(array, hashNumber){
-    //console.log('indexNthHash called');
+function indexNthHash(array, hashNumber){    
     let finalIndex = [];
     let count = 0;
     for (let z = 0; z < array.length; z++){
         if (array[z] === '░'){
-            count = count+1;
-            //console.log(array[z]);
-            //console.log(count);
+            count = count+1;            
         }
-        if (count === hashNumber){
-            //return finalIndex = z;
-            finalIndex.push(z);
-            //console.log(array[z]);
+        if (count === hashNumber){            
+            finalIndex.push(z);            
         }
-    }
-    //console.log(`index of nth hash: ${finalIndex}`);  
+    }    
     return finalIndex[0];
 }
 
-//splices hole for hash in Nth position
+//splices hole for field character in Nth position
 
 function spliceHole(array, hashIndex){
     const hole = 'O';
@@ -51,13 +47,13 @@ function spliceHole(array, hashIndex){
 function spliceAtRandom(array){
     const numberOfHash = howMuchHash(array);
     const randomNumber = 1 + Math.floor(Math.random() * (numberOfHash - 1));
-    const indexToSplice = indexNthHash(array, randomNumber);
-    //console.log(array[indexToSplice-1]);
+    const indexToSplice = indexNthHash(array, randomNumber);    
     const splicedArray = spliceHole(array, indexToSplice);
     return splicedArray;
 }
 
-console.log(exemplarArray);
-console.log(spliceAtRandom(exemplarArray));
+
 
 module.exports.spliceAtRandom = spliceAtRandom;
+
+//const exemplarArray = ['*','░','o','o','░','o','░','░','o','░','░','o','░']

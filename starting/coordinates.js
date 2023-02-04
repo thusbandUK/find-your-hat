@@ -1,3 +1,5 @@
+//takes current coordinates and direction and returns new coordinates
+
 const findNewCoordinates = (direction, startingArray, startingPosition) => {
 
     let finalArray = startingArray;
