@@ -2,6 +2,7 @@ const prompt = require('prompt-sync')({sigint: true});
 
 const {testExport} = require('./logic.js');
 const {findNewCoordinates} = require('./coordinates.js');
+const {spliceAtRandom} = require('./insertHole.js');
 
 const hat = '^';
 const hole = 'O';
@@ -170,4 +171,5 @@ else if (field[newCoordinates.newArray][newCoordinates.newPosition] === hat) {
 }
 }
 
-gamePlay(20,20);
+//gamePlay(process.argv[2],process.argv[3]);
+gamePlay(10,10);
