@@ -10,14 +10,15 @@ const fieldCharacter = '░';
 const pathCharacter = '*';
 
 class Field {
-  constructor(field, heightInput, widthInput) {
+  constructor(field, heightInput, widthInput, percentageHoleInput) {
     this._name = field;
     this._currentArray = 0;
     this._currentPosition = 0;
     
     this._selectedHeight = heightInput;
     this._selectedWidth = widthInput;
-    this._randomSelection = this.generateField(this._selectedHeight, this._selectedWidth);
+    this._selectedPercentageHole = percentageHoleInput;
+    this._randomSelection = this.generateField(this._selectedHeight, this._selectedWidth, this._selectedPercentageHole);
   }
   get name() {
    return this._name;
@@ -41,6 +42,14 @@ class Field {
 
   get selectedWidth() {
     return this._selectedWidth;
+  }
+
+  get percentageHole() {
+    return this._selectedPercentageHole;
+  }
+
+  set percentageHole(percentage) {
+    this._selectedPercentageHole = percentage;
   }
 
   set selectedHeight(height) {
@@ -110,12 +119,17 @@ class Field {
   completeArray[yCoordinate()][xCoordinate()] = hat;
 
   //determine number of holes to add from specified proportion
-
+  //console.log(`percentage hole in generateField = ${percentageHole}`);
   const defaultManagedPercentageHole = percentageHole ? percentageHole : 10;
   const numberOfHolesToAdd = defaultManagedPercentageHole / 100 * height * width;
+  console.log(`Number of holes: ${numberOfHolesToAdd}`);
   for (let w = 0; w < numberOfHolesToAdd; w++){
+    //console.log(w);
     let randomY = Math.floor(Math.random() * height);
+    //console.log(`Before: ${completeArray[randomY].join('')}`);
     const updatedArray = spliceAtRandom(completeArray[randomY]);
+    //console.log(`After: ${updatedArray.join('')}`);
+    //console.log(updatedArray);
     completeArray.splice(randomY, 1, updatedArray);
 
   }
@@ -157,13 +171,13 @@ class Field {
   
 
 
-const gamePlay = (enteredHeight, enteredWidth) => {
-  
+const gamePlay = (enteredHeight, enteredWidth, percentageHole) => {
+  //console.log(percentageHole);
   const myField = new Field([
     ['*', '░', 'O'],
     ['░', 'O', '░'],
     ['░', '^', '░'],
-  ], enteredHeight, enteredWidth);  
+  ], enteredHeight, enteredWidth, percentageHole);  
 
   let field = myField.randomSelection;
   
@@ -177,7 +191,7 @@ while (!gameFinished){
  
  const newCoordinates = findNewCoordinates(direction, myField.currentArray, myField.currentPosition) 
 
-if ((newCoordinates.newArray === -1) || (newCoordinates.newPosition === -1) || (newCoordinates.newArray >= field[myField.currentArray].length) || (newCoordinates.newPosition >= field.length)){
+if ((newCoordinates.newArray === -1) || (newCoordinates.newPosition === -1) || (newCoordinates.newArray >= field.length) || (newCoordinates.newPosition >= field[myField.currentArray].length)){
   console.log('Suck it loser! You lost!')
   return gameFinished = true;
 } 
@@ -203,4 +217,4 @@ else if (field[newCoordinates.newArray][newCoordinates.newPosition] === hat) {
 }
 
 //gamePlay(process.argv[2],process.argv[3]);
-gamePlay(10,10);
+gamePlay(10,80,20);
